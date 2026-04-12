@@ -2,7 +2,7 @@ package org.example;
 
 import java.util.Objects;
 
-public abstract class Person {
+public class Person {
     String firstName;
     String lastName;
     int age;

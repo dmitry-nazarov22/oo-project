@@ -9,6 +9,7 @@ public class App {
     }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        Person dima = new Person("Dima", "Nazarov", 22, "dima@example.com");
+        System.out.println(dima);
     }
 }
