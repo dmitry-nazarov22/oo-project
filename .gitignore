@@ -9,3 +9,11 @@ build
 
 # Mac created files
 .DS_Store
+
+# IntelliJ
+.idea/
+*.iml
+
+# Build output
+/build/
+out/
