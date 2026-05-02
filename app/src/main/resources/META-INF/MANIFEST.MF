@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Main-Class: oo-project
+Class-Path: guava-33.4.6-jre.jar jspecify-1.0.0.jar junit-jupiter-api-5.
+ 12.1.jar failureaccess-1.0.3.jar junit-jupiter-5.12.1.jar junit-jupiter
+ -engine-5.12.1.jar junit-platform-launcher-1.12.1.jar error_prone_annot
+ ations-2.36.0.jar junit-platform-engine-1.12.1.jar junit-jupiter-params
+ -5.12.1.jar j2objc-annotations-3.0.0.jar listenablefuture-9999.0-empty-
+ to-avoid-conflict-with-guava.jar junit-platform-commons-1.12.1.jar open
+ test4j-1.3.0.jar
+

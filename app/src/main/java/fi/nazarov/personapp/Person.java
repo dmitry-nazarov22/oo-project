@@ -1,4 +1,4 @@
-package org.example;
+package fi.nazarov.personapp;
 
 import java.util.Objects;
 
