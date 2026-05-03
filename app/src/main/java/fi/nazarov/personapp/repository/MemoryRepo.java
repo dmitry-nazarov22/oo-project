@@ -4,7 +4,7 @@ import fi.nazarov.personapp.lists.MyArrayList;
 import fi.nazarov.personapp.lists.MyList;
 import fi.nazarov.personapp.Person;
 
-public class MemoryRepo implements Repo {
+public class MemoryRepo implements Repository {
     MyList<Person> persons = new MyArrayList<Person>();
 
     @Override

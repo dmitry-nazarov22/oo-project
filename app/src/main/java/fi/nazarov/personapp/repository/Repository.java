@@ -3,7 +3,7 @@ package fi.nazarov.personapp.repository;
 import fi.nazarov.personapp.Person;
 import fi.nazarov.personapp.lists.MyList;
 
-public interface Repo {
+public interface Repository {
     /**
      * Find all person objects to display them.
      *
