@@ -1,4 +1,4 @@
-package fi.nazarov.personapp;
+package fi.nazarov.personapp.lists;
 
 public class MyArrayList<T> implements MyList<T> {
     private int size;

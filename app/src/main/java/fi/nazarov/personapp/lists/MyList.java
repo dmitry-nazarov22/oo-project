@@ -1,4 +1,4 @@
-package fi.nazarov.personapp;
+package fi.nazarov.personapp.lists;
 
 /**
  * Defines the structure for a list collection. This interface provides methods
