@@ -13,8 +13,8 @@ public class MemoryRepo implements Repository {
     }
 
     @Override
-    public boolean create(Person person) {
-        return false;
+    public boolean save(Person person) {
+
     }
 
     @Override

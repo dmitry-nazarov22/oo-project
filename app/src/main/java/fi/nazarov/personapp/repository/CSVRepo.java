@@ -10,7 +10,7 @@ public class CSVRepo implements Repository {
     }
 
     @Override
-    public boolean create(Person person) {
+    public boolean save(Person person) {
         return false;
     }
 

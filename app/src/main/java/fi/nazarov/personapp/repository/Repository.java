@@ -16,7 +16,7 @@ public interface Repository {
      * @param person person object to be saved.
      * @return true if successful and false if error.
      */
-    boolean create(Person person);
+    boolean save(Person person);
 
     /**
      * Delete a person from the list.
