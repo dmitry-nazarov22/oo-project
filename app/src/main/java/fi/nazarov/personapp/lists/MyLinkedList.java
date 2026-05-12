@@ -151,6 +151,30 @@ public class MyLinkedList<T> implements MyList<T> {
     }
 
     /**
+     * Set new value to the specified index.
+     *
+     * @param index specified index where value should be updated.
+     * @param updated value to be updated to the specified index.
+     * @throws IndexOutOfBoundsException if the index is out of range.
+     */
+    @Override
+    public void set(int index, T updated) {
+        if (index < 0 || index >= size()) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        if (index == 0) {
+            head.value = updated;
+        } else {
+            Node current = head;
+            for (int i = 0; i < index - 1; i++) {
+                current = current.next;
+            }
+            current.next.value = updated;
+        }
+    }
+
+    /**
      * Returns the number of elements in this list.
      *
      * @return the number of elements in this list
