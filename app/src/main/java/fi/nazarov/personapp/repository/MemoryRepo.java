@@ -9,21 +9,32 @@ public class MemoryRepo implements Repository {
 
     @Override
     public MyList<Person> findAll() {
-        return null;
+        return persons;
     }
 
     @Override
     public boolean save(Person person) {
-
+        persons.add(person);
+        return true;
     }
 
     @Override
     public boolean delete(int index) {
-        return false;
+        try {
+            persons.remove(index);
+            return true;
+        } catch (IndexOutOfBoundsException e) {
+            return false;
+        }
     }
 
     @Override
     public boolean edit(int index, Person updated) {
-        return false;
+        try {
+            persons.set(index, updated);
+            return true;
+        } catch (IndexOutOfBoundsException e) {
+            return false;
+        }
     }
 }
