@@ -60,6 +60,14 @@ public interface MyList<T> {
     boolean remove(T o);
 
     /**
+     * Set new value to the specified index.
+     *
+     * @param index specified index where value should be updated.
+     * @param updated value to be updated to the specified index.
+     */
+    void set(int index, T updated);
+
+    /**
      * Returns the number of elements in this list.
      *
      * @return the number of elements in this list
