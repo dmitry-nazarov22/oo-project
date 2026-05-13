@@ -7,6 +7,7 @@ public class MyArrayList<T> implements MyList<T> {
     /**
      * Default constructor.
      */
+    @SuppressWarnings("unchecked")
     public MyArrayList() {
         array = (T[]) new Object[START_SIZE];
         size = 0;
@@ -17,6 +18,7 @@ public class MyArrayList<T> implements MyList<T> {
      *
      * @param e the element to add
      */
+    @SuppressWarnings("unchecked")
     @Override
     public void add(final T e) {
         if (size == array.length) {
@@ -34,6 +36,7 @@ public class MyArrayList<T> implements MyList<T> {
      * Removes all the elements from this list. The list will be empty after
      * this call returns.
      */
+    @SuppressWarnings("unchecked")
     @Override
     public void clear() {
         array = (T[]) new Object[START_SIZE];
