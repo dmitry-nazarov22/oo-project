@@ -3,13 +3,17 @@
  */
 package fi.nazarov.personapp;
 
-public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+import fi.nazarov.personapp.controllers.PersonController;
+import fi.nazarov.personapp.repository.MemoryRepo;
+import fi.nazarov.personapp.repository.Repository;
+import fi.nazarov.personapp.ui.TerminalUI;
 
+public class App {
     public static void main(String[] args) {
-        Person dima = new Person("Dima", "Nazarov", 22, "dima@example.com");
-        System.out.println(dima);
+        Repository repository = new MemoryRepo();
+        PersonController controller = new PersonController(repository);
+
+        TerminalUI ui = new TerminalUI(controller);
+        ui.start();
     }
 }
