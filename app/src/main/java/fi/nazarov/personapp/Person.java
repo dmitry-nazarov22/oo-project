@@ -8,12 +8,12 @@ public class Person {
     int age;
     String email;
 
-    Person(String firstName, String lastName) {
+    public Person(String firstName, String lastName) {
         setFirstName(firstName);
         setLastName(lastName);
     }
 
-    Person(String firstName, String lastName, int age, String email) {
+    public Person(String firstName, String lastName, int age, String email) {
         setFirstName(firstName);
         setLastName(lastName);
         setAge(age);
