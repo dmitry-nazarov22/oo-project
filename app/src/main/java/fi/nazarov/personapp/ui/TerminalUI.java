@@ -157,13 +157,30 @@ public class TerminalUI {
                 toEdit.setEmail(s.nextLine());
                 break;
             case "5":
-                // TODO
+                IO.println("First name:    ");
+                String firstname = s.nextLine();
+                IO.println("Last name:    ");
+                String lastname = s.nextLine();
+                IO.println("Age:    ");
+                int age = s.nextInt();
+                s.nextLine();
+                IO.println("Email:    ");
+                String email = s.nextLine();
+
+                try {
+                    toEdit.setFirstName(firstname);
+                    toEdit.setLastName(lastname);
+                    toEdit.setAge(age);
+                    toEdit.setEmail(email);
+
+                    controller.editPerson(index, toEdit);
+                    IO.println("Contact edited successfully!");
+                } catch (IllegalArgumentException e) {
+                    IO.println(e);
+                }
                 break;
             default:
                 IO.println("There's no such option.");
         }
-
-        controller.editPerson(index, toEdit);
-        IO.println("Contact edited successfully!");
     }
 }
