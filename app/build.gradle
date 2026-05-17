@@ -45,3 +45,11 @@ tasks.named('test') {
 run {
     standardInput = System.in
 }
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'fi.nazarov.personapp.App'
+        )
+    }
+}
