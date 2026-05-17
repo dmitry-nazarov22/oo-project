@@ -4,13 +4,16 @@
 package fi.nazarov.personapp;
 
 import fi.nazarov.personapp.controllers.PersonController;
+import fi.nazarov.personapp.lists.MyArrayList;
+import fi.nazarov.personapp.lists.MyList;
 import fi.nazarov.personapp.repository.MemoryRepo;
 import fi.nazarov.personapp.repository.Repository;
 import fi.nazarov.personapp.ui.TerminalUI;
 
 public class App {
     public static void main(String[] args) {
-        Repository repository = new MemoryRepo();
+        MyList<Person> persons = new MyArrayList<Person>();
+        Repository repository = new MemoryRepo(persons);
         PersonController controller = new PersonController(repository);
 
         TerminalUI ui = new TerminalUI(controller);

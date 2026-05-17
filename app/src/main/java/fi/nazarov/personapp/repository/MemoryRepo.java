@@ -5,7 +5,11 @@ import fi.nazarov.personapp.lists.MyList;
 import fi.nazarov.personapp.Person;
 
 public class MemoryRepo implements Repository {
-    MyList<Person> persons = new MyArrayList<Person>();
+    MyList<Person> persons;
+
+    public MemoryRepo(MyList<Person> persons) {
+        this.persons = persons;
+    }
 
     @Override
     public MyList<Person> findAll() {
