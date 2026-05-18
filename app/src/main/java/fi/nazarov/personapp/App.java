@@ -17,7 +17,7 @@ public class App {
         // MyList<Person> persons = new MyLinkedList<Person>();
         MyList<Person> persons = new MyArrayList<Person>();
         // Repository repository = new MemoryRepo(persons);
-        Repository repository = new CSVRepo(persons, "src/main/java/fi/nazarov/personapp/datastorage/persons.csv");
+        Repository repository = new CSVRepo(persons, "datastorage/persons.csv");
         PersonController controller = new PersonController(repository);
 
         TerminalUI ui = new TerminalUI(controller);
