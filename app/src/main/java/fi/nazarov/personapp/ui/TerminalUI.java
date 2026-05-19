@@ -169,17 +169,17 @@ public class TerminalUI {
                 toEdit.setEmail(s.nextLine());
                 break;
             case "5":
-                IO.println("First name:    ");
-                String firstname = s.nextLine();
-                IO.println("Last name:    ");
-                String lastname = s.nextLine();
-                IO.println("Age:    ");
-                int age = s.nextInt();
-                s.nextLine();
-                IO.println("Email:    ");
-                String email = s.nextLine();
-
                 try {
+                    IO.println("First name:    ");
+                    String firstname = s.nextLine();
+                    IO.println("Last name:    ");
+                    String lastname = s.nextLine();
+                    IO.println("Age:    ");
+                    int age = s.nextInt();
+                    s.nextLine();
+                    IO.println("Email:    ");
+                    String email = s.nextLine();
+
                     toEdit.setFirstName(firstname);
                     toEdit.setLastName(lastname);
                     toEdit.setAge(age);
@@ -189,6 +189,8 @@ public class TerminalUI {
                     IO.println("Contact edited successfully!");
                 } catch (IllegalArgumentException e) {
                     IO.println(e);
+                } catch (InputMismatchException e) {
+                    IO.println("Age must be a number.");
                 }
                 break;
             default:
