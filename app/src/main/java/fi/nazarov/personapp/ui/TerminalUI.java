@@ -4,6 +4,7 @@ import fi.nazarov.personapp.Person;
 import fi.nazarov.personapp.controllers.PersonController;
 import fi.nazarov.personapp.lists.MyList;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class TerminalUI {
@@ -62,30 +63,41 @@ public class TerminalUI {
 
     private void showContacts() {
         MyList<Person> persons = controller.fetchAllPersons();
+
+        IO.println("Contacts:\n");
+
         for (int i = 0; i < persons.size(); i++) {
-            IO.println(persons.get(i));
+            Person p = persons.get(i);
+
+            IO.println((i + 1) + ".");
+            IO.println("Name:    " + p.getLastName() + ", " + p.getFirstName());
+            IO.println("Age:     " + p.getAge());
+            IO.println("Email:   " + p.getEmail() + "\n");
         }
     }
 
     private void createContact() {
         Scanner s = new Scanner(System.in);
 
-        IO.println("First name:    ");
-        String firstname = s.nextLine();
-        IO.println("Last name:    ");
-        String lastname = s.nextLine();
-        IO.println("Age:    ");
-        int age = s.nextInt();
-        s.nextLine();
-        IO.println("Email:    ");
-        String email = s.nextLine();
-
         try {
+
+            IO.println("First name:    ");
+            String firstname = s.nextLine();
+            IO.println("Last name:    ");
+            String lastname = s.nextLine();
+            IO.println("Age:    ");
+            int age = s.nextInt();
+            s.nextLine();
+            IO.println("Email:    ");
+            String email = s.nextLine();
+
             Person p = new Person(firstname, lastname, age, email);
             controller.createPerson(p);
             IO.println("Contact added!");
         } catch (IllegalArgumentException e) {
             IO.println(e);
+        } catch (InputMismatchException e) {
+            IO.println("Age must be a number.");
         }
     }
 
