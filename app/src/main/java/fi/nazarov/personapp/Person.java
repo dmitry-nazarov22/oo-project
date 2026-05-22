@@ -62,7 +62,7 @@ public class Person {
     }
 
     public static boolean validateEmail(String email) {
-        String regexPattern = "^[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}$";
+        String regexPattern = "^$|^[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}$";
         return Pattern.compile(regexPattern)
             .matcher(email)
             .matches();
