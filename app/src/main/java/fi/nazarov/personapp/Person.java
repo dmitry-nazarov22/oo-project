@@ -1,6 +1,7 @@
 package fi.nazarov.personapp;
 
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class Person {
     String firstName;
@@ -50,6 +51,21 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public static boolean validateName(String name) {
+        return name.length() >= 2;
+    }
+
+    public static boolean validateAge(int age) {
+        return age >= 0;
+    }
+
+    public static boolean validateEmail(String email) {
+        String regexPattern = "^[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}$";
+        return Pattern.compile(regexPattern)
+            .matcher(email)
+            .matches();
     }
 
     @Override
