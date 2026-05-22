@@ -116,8 +116,16 @@ public class TerminalUI {
         int index = s.nextInt() - 1;
         s.nextLine();
 
-        controller.deletePerson(index);
-        IO.println("Contact deleted successfully!");
+        IO.println("Are you sure to delete contact number " + (index + 1) + "?");
+        IO.println("Input 'y' if you are sure.");
+        String verification = s.nextLine();
+
+        if (verification.equals("y")) {
+            controller.deletePerson(index);
+            IO.println("Contact deleted successfully!");
+        } else {
+            IO.println("Contact was not deleted.");
+        }
     }
 
     private void editContact() {
