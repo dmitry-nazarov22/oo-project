@@ -80,16 +80,10 @@ public class TerminalUI {
         Scanner s = new Scanner(System.in);
 
         try {
-
-            IO.println("First name:    ");
-            String firstname = s.nextLine();
-            IO.println("Last name:    ");
-            String lastname = s.nextLine();
-            IO.println("Age:    ");
-            int age = s.nextInt();
-            s.nextLine();
-            IO.println("Email:    ");
-            String email = s.nextLine();
+            String firstname = promptValidName(s, "First name");
+            String lastname = promptValidName(s, "Last name");
+            int age = promptValidAge(s);
+            String email = promptValidEmail(s);
 
             Person p = new Person(firstname, lastname, age, email);
             controller.createPerson(p);
@@ -160,41 +154,35 @@ public class TerminalUI {
 
         switch(choice) {
             case "1":
-                IO.println("Input new first name:   ");
-                toEdit.setFirstName(s.nextLine());
+                toEdit.setFirstName(promptValidName(s, "New first name"));
+                IO.println("Contact edited successfully!");
+                IO.println(toEdit);
                 break;
             case "2":
-                IO.println("Input new last name:   ");
-                toEdit.setLastName(s.nextLine());
+                toEdit.setLastName(promptValidName(s, "New last name"));
+                IO.println("Contact edited successfully!");
+                IO.println(toEdit);
                 break;
             case "3":
-                IO.println("Input new age:   ");
-                toEdit.setAge(s.nextInt());
-                s.nextLine();
+                toEdit.setAge(promptValidAge(s));
+                IO.println("Contact edited successfully!");
+                IO.println(toEdit);
                 break;
             case "4":
-                IO.println("Input new email:   ");
-                toEdit.setEmail(s.nextLine());
+                toEdit.setEmail(promptValidEmail(s));
+                IO.println("Contact edited successfully!");
+                IO.println(toEdit);
                 break;
             case "5":
                 try {
-                    IO.println("First name:    ");
-                    String firstname = s.nextLine();
-                    IO.println("Last name:    ");
-                    String lastname = s.nextLine();
-                    IO.println("Age:    ");
-                    int age = s.nextInt();
-                    s.nextLine();
-                    IO.println("Email:    ");
-                    String email = s.nextLine();
-
-                    toEdit.setFirstName(firstname);
-                    toEdit.setLastName(lastname);
-                    toEdit.setAge(age);
-                    toEdit.setEmail(email);
+                    toEdit.setFirstName(promptValidName(s, "New first name"));
+                    toEdit.setLastName(promptValidName(s, "New last name"));
+                    toEdit.setAge(promptValidAge(s));
+                    toEdit.setEmail(promptValidEmail(s));
 
                     controller.editPerson(index, toEdit);
                     IO.println("Contact edited successfully!");
+                    IO.println(toEdit);
                 } catch (IllegalArgumentException e) {
                     IO.println(e);
                 } catch (InputMismatchException e) {
@@ -204,5 +192,38 @@ public class TerminalUI {
             default:
                 IO.println("There's no such option.");
         }
+    }
+
+    private String promptValidName(Scanner s, String fieldName) {
+        IO.println(fieldName + ": [at least 2 characters]");
+        String value = s.nextLine();
+        while (!Person.validateName(value)) {
+            IO.println("Invalid " + fieldName + ". Please, input it again:");
+            value = s.nextLine();
+        };
+
+        return value;
+    }
+
+    private int promptValidAge(Scanner s) {
+        IO.println("Age: [age >= 0]");
+        int value = Integer.parseInt(s.nextLine());
+        while (!Person.validateAge(value)) {
+            IO.println("Invalid age. Please, input it again:    [age >= 0]");
+            value = Integer.parseInt(s.nextLine());
+        };
+
+        return value;
+    };
+
+    private String promptValidEmail(Scanner s) {
+        IO.println("Email:    (optional | [test-mail@test.com])");
+        String value = s.nextLine();
+        while (!Person.validateEmail(value)) {
+            IO.println("Invalid email. Please, input it again:    (optional | [test-mail@test.com])");
+            value = s.nextLine();
+        };
+
+        return value;
     }
 }
