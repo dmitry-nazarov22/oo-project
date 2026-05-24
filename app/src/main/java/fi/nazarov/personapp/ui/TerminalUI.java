@@ -79,20 +79,14 @@ public class TerminalUI {
     private void createContact() {
         Scanner s = new Scanner(System.in);
 
-        try {
-            String firstname = promptValidName(s, "First name");
-            String lastname = promptValidName(s, "Last name");
-            int age = promptValidAge(s);
-            String email = promptValidEmail(s);
+        String firstname = promptValidName(s, "First name");
+        String lastname = promptValidName(s, "Last name");
+        int age = promptValidAge(s);
+        String email = promptValidEmail(s);
 
-            Person p = new Person(firstname, lastname, age, email);
-            controller.createPerson(p);
-            IO.println("Contact added!");
-        } catch (IllegalArgumentException e) {
-            IO.println(e);
-        } catch (InputMismatchException e) {
-            IO.println("Age must be a number.");
-        }
+        Person p = new Person(firstname, lastname, age, email);
+        controller.createPerson(p);
+        IO.println("Contact added!");
     }
 
     private void deleteContact() {
@@ -106,9 +100,17 @@ public class TerminalUI {
             int displayIndex = i + 1;
             IO.println(displayIndex + ".   " + p.getLastName() + ", " + p.getFirstName());
         }
+        boolean invalidIndex = true;
+        int index = 0;
 
-        int index = s.nextInt() - 1;
-        s.nextLine();
+        while (invalidIndex) {
+            try {
+                index = Integer.parseInt(s.nextLine()) - 1;
+                invalidIndex = false;
+            } catch (NumberFormatException e) {
+                IO.println("Index must be a valid integer. Please, try again.");
+            }
+        }
 
         IO.println("Are you sure to delete contact number " + (index + 1) + "?");
         IO.println("Input 'y' if you are sure.");
@@ -133,10 +135,16 @@ public class TerminalUI {
         }
 
         Scanner s = new Scanner(System.in);
+        int index;
 
-        IO.println("Index of the contact:    ");
-        int index = s.nextInt() - 1;
-        s.nextLine();
+        try {
+            IO.println("Index of the contact:    ");
+            index = Integer.parseInt(s.nextLine()) - 1;
+        } catch (NumberFormatException e) {
+            IO.println("Index must be a valid integer.");
+            return;
+        }
+
 
         Person toEdit = persons.get(index);
 
@@ -174,20 +182,14 @@ public class TerminalUI {
                 IO.println(toEdit);
                 break;
             case "5":
-                try {
-                    toEdit.setFirstName(promptValidName(s, "New first name"));
-                    toEdit.setLastName(promptValidName(s, "New last name"));
-                    toEdit.setAge(promptValidAge(s));
-                    toEdit.setEmail(promptValidEmail(s));
+                toEdit.setFirstName(promptValidName(s, "New first name"));
+                toEdit.setLastName(promptValidName(s, "New last name"));
+                toEdit.setAge(promptValidAge(s));
+                toEdit.setEmail(promptValidEmail(s));
 
-                    controller.editPerson(index, toEdit);
-                    IO.println("Contact edited successfully!");
-                    IO.println(toEdit);
-                } catch (IllegalArgumentException e) {
-                    IO.println(e);
-                } catch (InputMismatchException e) {
-                    IO.println("Age must be a number.");
-                }
+                controller.editPerson(index, toEdit);
+                IO.println("Contact edited successfully!");
+                IO.println(toEdit);
                 break;
             default:
                 IO.println("There's no such option.");
@@ -207,13 +209,15 @@ public class TerminalUI {
 
     private int promptValidAge(Scanner s) {
         IO.println("Age: [age >= 0]");
-        int value = Integer.parseInt(s.nextLine());
-        while (!Person.validateAge(value)) {
-            IO.println("Invalid age. Please, input it again:    [age >= 0]");
-            value = Integer.parseInt(s.nextLine());
-        };
-
-        return value;
+        while (true) {
+            try {
+                int value = Integer.parseInt(s.nextLine());
+                if (Person.validateAge(value)) return value;
+                IO.println("Invalid age. Please, input it again:    [age >= 0]");
+            } catch (NumberFormatException e) {
+                IO.println("Age must be a valid integer. Please, input it again:");
+            }
+        }
     };
 
     private String promptValidEmail(Scanner s) {
