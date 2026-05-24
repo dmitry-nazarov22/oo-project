@@ -68,7 +68,10 @@ public class CSVRepo implements Repository {
                 String firstName = parts[0];
                 String lastName = parts[1];
                 int age = Integer.parseInt(parts[2]);
-                String email = parts[3];
+                String email = "";
+                if (parts.length == 4) {
+                    email = parts[3];
+                }
 
                 Person person = new Person(firstName, lastName, age, email);
                 persons.add(person);
