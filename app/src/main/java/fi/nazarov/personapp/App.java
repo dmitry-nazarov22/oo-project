@@ -10,7 +10,9 @@ import fi.nazarov.personapp.lists.MyList;
 import fi.nazarov.personapp.repository.CSVRepo;
 import fi.nazarov.personapp.repository.MemoryRepo;
 import fi.nazarov.personapp.repository.Repository;
+import fi.nazarov.personapp.ui.FXUI;
 import fi.nazarov.personapp.ui.TerminalUI;
+import javafx.application.Application;
 
 public class App {
     public static void main(String[] args) {
@@ -18,9 +20,13 @@ public class App {
         MyList<Person> persons = new MyArrayList<Person>();
         // Repository repository = new MemoryRepo(persons);
         Repository repository = new CSVRepo(persons, "datastorage/persons.csv");
-        PersonController controller = new PersonController(repository);
+        // PersonController controllerUI = new PersonController(repository);
 
-        TerminalUI ui = new TerminalUI(controller);
-        ui.start();
+        // TerminalUI ui = new TerminalUI(controllerUI);
+        // ui.start();
+
+        PersonController controllerGUI = new PersonController(repository);
+        FXUI.setController(controllerGUI);
+        Application.launch(FXUI.class, args);
     }
 }
