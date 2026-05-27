@@ -3,6 +3,7 @@ package fi.nazarov.personapp.ui;
 import fi.nazarov.personapp.Person;
 import fi.nazarov.personapp.controllers.PersonController;
 
+import fi.nazarov.personapp.lists.MyList;
 import javafx.application.Application;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -26,6 +27,7 @@ public class FXUI extends Application {
 
         TableView<Person> table = createPersonTable();
         root.getChildren().add(table);
+        refreshTable(table);
 
         Scene scene = new Scene(root, 400, 400);
 
@@ -65,5 +67,15 @@ public class FXUI extends Application {
         );
 
         return contacts;
+    }
+
+    private void refreshTable(TableView<Person> table) {
+        table.getItems().clear();
+
+        MyList<Person> persons = controller.fetchAllPersons();
+
+        for (int i = 0; i < persons.size(); i++) {
+            table.getItems().add(persons.get(i));
+        }
     }
 }
