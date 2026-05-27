@@ -79,9 +79,17 @@ public class FXUI extends Application {
         HBox addPersonComponent = new HBox();
 
         TextField firstNameField = new TextField();
+        firstNameField.setPromptText("First name");
+
         TextField lastNameField = new TextField();
+        lastNameField.setPromptText("Last name");
+
         TextField ageField = new TextField();
+        ageField.setPromptText("Age");
+
         TextField emailField = new TextField();
+        emailField.setPromptText("Email");
+
 
         Button addButton = new Button("Add");
         addButton.setOnAction(event -> {
