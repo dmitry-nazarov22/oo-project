@@ -6,6 +6,7 @@ import fi.nazarov.personapp.lists.MyList;
 import javafx.application.Application;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -26,6 +27,8 @@ public class FXUI extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         VBox root = new VBox();
+        root.setPadding(new Insets(30));
+        root.setSpacing(10);
 
         TableView<Person> table = createPersonTable();
         root.getChildren().add(table);
@@ -35,7 +38,7 @@ public class FXUI extends Application {
 
         root.getChildren().add(addPersonComponent);
 
-        Scene scene = new Scene(root, 700, 400);
+        Scene scene = new Scene(root, 800, 400);
 
         primaryStage.setTitle("Contacts");
         primaryStage.setScene(scene);
