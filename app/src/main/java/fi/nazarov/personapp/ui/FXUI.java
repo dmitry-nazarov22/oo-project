@@ -2,14 +2,16 @@ package fi.nazarov.personapp.ui;
 
 import fi.nazarov.personapp.Person;
 import fi.nazarov.personapp.controllers.PersonController;
-
 import fi.nazarov.personapp.lists.MyList;
 import javafx.application.Application;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -28,6 +30,41 @@ public class FXUI extends Application {
         TableView<Person> table = createPersonTable();
         root.getChildren().add(table);
         refreshTable(table);
+
+        HBox addPersonLayout = new HBox();
+
+        TextField firstNameField = new TextField();
+        TextField lastNameField = new TextField();
+        TextField ageField = new TextField();
+        TextField emailField = new TextField();
+
+        Button addButton = new Button("Add");
+        addButton.setOnAction(event -> {
+            String firstName = firstNameField.getText();
+            String lastName = lastNameField.getText();
+            int age = Integer.parseInt(ageField.getText());
+            String email = emailField.getText();
+
+            Person p = new Person(firstName, lastName, age, email);
+            controller.createPerson(p);
+
+            refreshTable(table);
+
+            firstNameField.clear();
+            lastNameField.clear();
+            ageField.clear();
+            emailField.clear();
+        });
+
+        addPersonLayout.getChildren().addAll(
+                firstNameField,
+                lastNameField,
+                ageField,
+                emailField,
+                addButton
+        );
+
+        root.getChildren().add(addPersonLayout);
 
         Scene scene = new Scene(root, 400, 400);
 
