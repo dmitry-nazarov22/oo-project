@@ -35,7 +35,7 @@ public class FXUI extends Application {
 
         root.getChildren().add(addPersonComponent);
 
-        Scene scene = new Scene(root, 400, 400);
+        Scene scene = new Scene(root, 700, 400);
 
         primaryStage.setTitle("Contacts");
         primaryStage.setScene(scene);
