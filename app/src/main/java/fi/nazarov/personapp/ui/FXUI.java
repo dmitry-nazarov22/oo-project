@@ -31,40 +31,9 @@ public class FXUI extends Application {
         root.getChildren().add(table);
         refreshTable(table);
 
-        HBox addPersonLayout = new HBox();
+        HBox addPersonComponent = createAddPersonComponent(table);
 
-        TextField firstNameField = new TextField();
-        TextField lastNameField = new TextField();
-        TextField ageField = new TextField();
-        TextField emailField = new TextField();
-
-        Button addButton = new Button("Add");
-        addButton.setOnAction(event -> {
-            String firstName = firstNameField.getText();
-            String lastName = lastNameField.getText();
-            int age = Integer.parseInt(ageField.getText());
-            String email = emailField.getText();
-
-            Person p = new Person(firstName, lastName, age, email);
-            controller.createPerson(p);
-
-            refreshTable(table);
-
-            firstNameField.clear();
-            lastNameField.clear();
-            ageField.clear();
-            emailField.clear();
-        });
-
-        addPersonLayout.getChildren().addAll(
-                firstNameField,
-                lastNameField,
-                ageField,
-                emailField,
-                addButton
-        );
-
-        root.getChildren().add(addPersonLayout);
+        root.getChildren().add(addPersonComponent);
 
         Scene scene = new Scene(root, 400, 400);
 
@@ -104,6 +73,43 @@ public class FXUI extends Application {
         );
 
         return contacts;
+    }
+
+    private HBox createAddPersonComponent(TableView<Person> table) {
+        HBox addPersonComponent = new HBox();
+
+        TextField firstNameField = new TextField();
+        TextField lastNameField = new TextField();
+        TextField ageField = new TextField();
+        TextField emailField = new TextField();
+
+        Button addButton = new Button("Add");
+        addButton.setOnAction(event -> {
+            String firstName = firstNameField.getText();
+            String lastName = lastNameField.getText();
+            int age = Integer.parseInt(ageField.getText());
+            String email = emailField.getText();
+
+            Person p = new Person(firstName, lastName, age, email);
+            controller.createPerson(p);
+
+            refreshTable(table);
+
+            firstNameField.clear();
+            lastNameField.clear();
+            ageField.clear();
+            emailField.clear();
+        });
+
+        addPersonComponent.getChildren().addAll(
+                firstNameField,
+                lastNameField,
+                ageField,
+                emailField,
+                addButton
+        );
+
+        return addPersonComponent;
     }
 
     private void refreshTable(TableView<Person> table) {
