@@ -4,8 +4,6 @@ import fi.nazarov.personapp.Person;
 import fi.nazarov.personapp.controllers.PersonController;
 import fi.nazarov.personapp.lists.MyList;
 import javafx.application.Application;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -13,7 +11,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.jspecify.annotations.NonNull;
 
 public class FXUI extends Application {
 
