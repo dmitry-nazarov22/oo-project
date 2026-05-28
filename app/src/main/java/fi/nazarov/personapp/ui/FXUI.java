@@ -66,11 +66,34 @@ public class FXUI extends Application {
                 new PropertyValueFactory<Person, String>("email")
         );
 
+        TableColumn<Person, Void> deleteCol = new TableColumn<>();
+        deleteCol.setCellFactory(cell -> new TableCell<>() {
+            Button deleteButton = new Button("Delete");
+            {
+                deleteButton.setOnAction(event -> {
+                    int index = getIndex();
+                    controller.deletePerson(index);
+                    refreshTable(contacts);
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(deleteButton);
+                }
+            }
+        });
+
         contacts.getColumns().addAll(
                 firstNameCol,
                 lastNameCol,
                 ageCol,
-                emailCol
+                emailCol,
+                deleteCol
         );
 
         return contacts;
