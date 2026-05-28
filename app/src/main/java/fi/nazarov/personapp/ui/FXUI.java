@@ -67,6 +67,8 @@ public class FXUI extends Application {
                 new PropertyValueFactory<Person, String>("email")
         );
 
+        TableColumn<Person, Void> editCol = getEditColumn(contacts);
+
         TableColumn<Person, Void> deleteCol = getDeleteColumn(contacts);
 
         contacts.getColumns().addAll(
@@ -74,6 +76,7 @@ public class FXUI extends Application {
                 lastNameCol,
                 ageCol,
                 emailCol,
+                editCol,
                 deleteCol
         );
 
@@ -128,7 +131,7 @@ public class FXUI extends Application {
     private TableColumn<Person, Void> getDeleteColumn(TableView<Person> contacts) {
         TableColumn<Person, Void> deleteCol = new TableColumn<>();
         deleteCol.setCellFactory(cell -> new TableCell<>() {
-            Button deleteButton = new Button("Delete");
+            final Button deleteButton = new Button("Delete");
             {
                 deleteButton.setOnAction(event -> {
                     int index = getIndex();
@@ -148,6 +151,24 @@ public class FXUI extends Application {
             }
         });
         return deleteCol;
+    }
+
+    private TableColumn<Person, Void> getEditColumn(TableView<Person> contacts) {
+        TableColumn<Person, Void> editCol = new TableColumn<>();
+        editCol.setCellFactory(cell -> new TableCell<>() {
+            final Button editButton = new Button("Edit");
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(editButton);
+                }
+            }
+        });
+        return editCol;
     }
 
     private void refreshTable(TableView<Person> table) {
