@@ -157,6 +157,13 @@ public class FXUI extends Application {
         TableColumn<Person, Void> editCol = new TableColumn<>();
         editCol.setCellFactory(cell -> new TableCell<>() {
             final Button editButton = new Button("Edit");
+            {
+                editButton.setOnAction(event -> {
+                    int index = getIndex();
+                    Person p = contacts.getItems().get(index);
+                    openEditDialog(p, index, contacts);
+                });
+            }
 
             @Override
             protected void updateItem(Void item, boolean empty) {
@@ -169,6 +176,53 @@ public class FXUI extends Application {
             }
         });
         return editCol;
+    }
+
+    private void openEditDialog(Person p, int index, TableView<Person> contacts) {
+        Stage dialog = new Stage();
+        dialog.setTitle("Edit contact");
+
+        TextField firstNameField = new TextField(p.getFirstName());
+        firstNameField.setPromptText("First name");
+
+        TextField lastNameField = new TextField(p.getLastName());
+        lastNameField.setPromptText("Last name");
+
+        TextField ageField = new TextField(String.valueOf(p.getAge()));
+        ageField.setPromptText("Age");
+
+        TextField emailField = new TextField(p.getEmail());
+        emailField.setPromptText("Email");
+
+        Button saveButton = new Button("Save");
+        saveButton.setOnAction(event -> {
+            p.setFirstName(firstNameField.getText());
+            p.setLastName(lastNameField.getText());
+            p.setAge(Integer.parseInt(ageField.getText()));
+            p.setEmail(emailField.getText());
+
+            controller.editPerson(index, p);
+            refreshTable(contacts);
+            dialog.close();
+        });
+
+        Button closeButton = new Button("Close");
+        closeButton.setOnAction(event -> {
+            dialog.close();
+        });
+
+        VBox layout = new VBox(10,
+            firstNameField,
+            lastNameField,
+            ageField,
+            emailField,
+            saveButton,
+            closeButton
+        );
+        layout.setPadding(new Insets(10));
+
+        dialog.setScene(new Scene(layout, 300, 300));
+        dialog.show();
     }
 
     private void refreshTable(TableView<Person> table) {
