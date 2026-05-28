@@ -8,10 +8,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -49,24 +47,24 @@ public class FXUI extends Application {
         TableView<Person> contacts = new TableView<>();
 
         TableColumn<Person, String> firstNameCol = new TableColumn<>("First name");
-        firstNameCol.setCellValueFactory(cellData -> new SimpleStringProperty(
-                cellData.getValue().getFirstName()
-        ));
+        firstNameCol.setCellValueFactory(
+                new PropertyValueFactory<Person, String>("firstName")
+        );
 
         TableColumn<Person, String> lastNameCol = new TableColumn<>("Last name");
-        lastNameCol.setCellValueFactory(cellData -> new SimpleStringProperty(
-                cellData.getValue().getLastName()
-        ));
+        lastNameCol.setCellValueFactory(
+                new PropertyValueFactory<Person, String>("lastName")
+        );
 
         TableColumn<Person, Number> ageCol = new TableColumn<>("Age");
-        ageCol.setCellValueFactory(cellData -> new SimpleIntegerProperty(
-                cellData.getValue().getAge()
-        ));
+        ageCol.setCellValueFactory(
+                new PropertyValueFactory<Person, Number>("age")
+        );
 
         TableColumn<Person, String> emailCol = new TableColumn<>("Email");
-        emailCol.setCellValueFactory(cellData -> new SimpleStringProperty(
-                cellData.getValue().getEmail()
-        ));
+        emailCol.setCellValueFactory(
+                new PropertyValueFactory<Person, String>("email")
+        );
 
         contacts.getColumns().addAll(
                 firstNameCol,
