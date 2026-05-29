@@ -179,24 +179,66 @@ public class FXUI extends Application {
         Stage dialog = new Stage();
         dialog.setTitle("Edit contact");
 
+        Label firstNError = new Label();
         TextField firstNameField = new TextField(p.getFirstName());
         firstNameField.setPromptText("First name");
 
+        Label lastNError = new Label();
         TextField lastNameField = new TextField(p.getLastName());
         lastNameField.setPromptText("Last name");
 
+        Label ageError = new Label();
         TextField ageField = new TextField(String.valueOf(p.getAge()));
         ageField.setPromptText("Age");
 
+        Label emailError = new Label();
         TextField emailField = new TextField(p.getEmail());
         emailField.setPromptText("Email");
 
         Button saveButton = new Button("Save");
         saveButton.setOnAction(event -> {
-            p.setFirstName(firstNameField.getText());
-            p.setLastName(lastNameField.getText());
-            p.setAge(Integer.parseInt(ageField.getText()));
-            p.setEmail(emailField.getText());
+
+            boolean valid = true;
+
+            String firstName = firstNameField.getText();
+            String lastName = lastNameField.getText();
+            String ageString = ageField.getText();
+            String email = emailField.getText();
+
+            if (!Person.validateName(firstName)) {
+                firstNError.setText("First name must be at lest 2 characters.");
+                valid = false;
+            }
+
+            if (!Person.validateName(lastName)) {
+                lastNError.setText("Last name must be at lest 2 characters.");
+                valid = false;
+            }
+
+            int age = -0;
+
+            try {
+                age = Integer.parseInt(ageString);
+                if (!Person.validateAge(age)) {
+                    ageError.setText("Age must be 0 or greater.");
+                    valid = false;
+                }
+            } catch (NumberFormatException e) {
+                ageError.setText("Age must be a valid number!");
+                valid = false;
+            }
+
+            if (!Person.validateEmail(email)) {
+                emailError.setText("Invalid email");
+                valid = false;
+            }
+
+            if (!valid) return;
+
+            p.setFirstName(firstName);
+            p.setLastName(lastName);
+            p.setAge(age);
+            p.setEmail(email);
 
             controller.editPerson(index, p);
             refreshTable(contacts);
@@ -208,11 +250,11 @@ public class FXUI extends Application {
             dialog.close();
         });
 
-        VBox layout = new VBox(10,
-            firstNameField,
-            lastNameField,
-            ageField,
-            emailField,
+        VBox layout = new VBox(5,
+            firstNameField, firstNError,
+            lastNameField, lastNError,
+            ageField, ageError,
+            emailField, emailError,
             saveButton,
             closeButton
         );
