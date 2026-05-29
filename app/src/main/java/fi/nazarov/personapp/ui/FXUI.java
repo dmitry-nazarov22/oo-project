@@ -34,7 +34,7 @@ public class FXUI extends Application {
 
         root.getChildren().add(addPersonComponent);
 
-        Scene scene = new Scene(root, 800, 400);
+        Scene scene = new Scene(root, 900, 400);
 
         primaryStage.setTitle("Contacts");
         primaryStage.setScene(scene);
@@ -81,7 +81,6 @@ public class FXUI extends Application {
     }
 
     private HBox createAddPersonComponent(TableView<Person> table) {
-        HBox addPersonComponent = new HBox();
 
         TextField firstNameField = new TextField();
         firstNameField.setPromptText("First name");
@@ -95,9 +94,30 @@ public class FXUI extends Application {
         TextField emailField = new TextField();
         emailField.setPromptText("Email");
 
+        Label firstNError = new Label();
+        Label lastNError = new Label();
+        Label ageError = new Label();
+        Label emailError = new Label();
+
+        firstNError.setStyle("-fx-text-fill: red;");
+        lastNError.setStyle("-fx-text-fill: red;");
+        ageError.setStyle("-fx-text-fill: red;");
+        emailError.setStyle("-fx-text-fill: red;");
+
 
         Button addButton = new Button("Add");
         addButton.setOnAction(event -> {
+            if (!validateInputs(
+                    firstNameField,
+                    lastNameField,
+                    ageField,
+                    emailField,
+                    firstNError,
+                    lastNError,
+                    ageError,
+                    emailError
+            )) return;
+
             String firstName = firstNameField.getText();
             String lastName = lastNameField.getText();
             int age = Integer.parseInt(ageField.getText());
@@ -114,15 +134,13 @@ public class FXUI extends Application {
             emailField.clear();
         });
 
-        addPersonComponent.getChildren().addAll(
-                firstNameField,
-                lastNameField,
-                ageField,
-                emailField,
+        return new HBox(5,
+                new VBox(5, firstNameField, firstNError),
+                new VBox(5, lastNameField, lastNError),
+                new VBox(5, ageField, ageError),
+                new VBox(5, emailField, emailError),
                 addButton
         );
-
-        return addPersonComponent;
     }
 
     private TableColumn<Person, Void> getDeleteColumn(TableView<Person> contacts) {
