@@ -179,21 +179,27 @@ public class FXUI extends Application {
         Stage dialog = new Stage();
         dialog.setTitle("Edit contact");
 
-        Label firstNError = new Label();
         TextField firstNameField = new TextField(p.getFirstName());
         firstNameField.setPromptText("First name");
 
-        Label lastNError = new Label();
         TextField lastNameField = new TextField(p.getLastName());
         lastNameField.setPromptText("Last name");
 
-        Label ageError = new Label();
         TextField ageField = new TextField(String.valueOf(p.getAge()));
         ageField.setPromptText("Age");
 
-        Label emailError = new Label();
         TextField emailField = new TextField(p.getEmail());
         emailField.setPromptText("Email");
+
+        Label firstNError = new Label();
+        Label lastNError = new Label();
+        Label ageError = new Label();
+        Label emailError = new Label();
+
+        firstNError.setStyle("-fx-text-fill: red;");
+        lastNError.setStyle("-fx-text-fill: red;");
+        ageError.setStyle("-fx-text-fill: red;");
+        emailError.setStyle("-fx-text-fill: red;");
 
         Button saveButton = new Button("Save");
         saveButton.setOnAction(event -> {
