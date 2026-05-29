@@ -203,48 +203,21 @@ public class FXUI extends Application {
 
         Button saveButton = new Button("Save");
         saveButton.setOnAction(event -> {
+            if (!validateInputs(
+                firstNameField,
+                lastNameField,
+                ageField,
+                emailField,
+                firstNError,
+                lastNError,
+                ageError,
+                emailError
+            )) return;
 
-            boolean valid = true;
-
-            String firstName = firstNameField.getText();
-            String lastName = lastNameField.getText();
-            String ageString = ageField.getText();
-            String email = emailField.getText();
-
-            if (!Person.validateName(firstName)) {
-                firstNError.setText("First name must be at lest 2 characters.");
-                valid = false;
-            }
-
-            if (!Person.validateName(lastName)) {
-                lastNError.setText("Last name must be at lest 2 characters.");
-                valid = false;
-            }
-
-            int age = -0;
-
-            try {
-                age = Integer.parseInt(ageString);
-                if (!Person.validateAge(age)) {
-                    ageError.setText("Age must be 0 or greater.");
-                    valid = false;
-                }
-            } catch (NumberFormatException e) {
-                ageError.setText("Age must be a valid number!");
-                valid = false;
-            }
-
-            if (!Person.validateEmail(email)) {
-                emailError.setText("Invalid email");
-                valid = false;
-            }
-
-            if (!valid) return;
-
-            p.setFirstName(firstName);
-            p.setLastName(lastName);
-            p.setAge(age);
-            p.setEmail(email);
+            p.setFirstName(firstNameField.getText());
+            p.setLastName(lastNameField.getText());
+            p.setAge(Integer.parseInt(ageField.getText()));
+            p.setEmail(emailField.getText());
 
             controller.editPerson(index, p);
             refreshTable(contacts);
@@ -268,6 +241,58 @@ public class FXUI extends Application {
 
         dialog.setScene(new Scene(layout, 300, 300));
         dialog.show();
+    }
+
+    private boolean validateInputs(
+            TextField firstNameField,
+            TextField lastNameField,
+            TextField ageField,
+            TextField emailField,
+            Label firstNError,
+            Label lastNError,
+            Label ageError,
+            Label emailError
+    ) {
+        boolean valid = true;
+
+        firstNError.setText("");
+        lastNError.setText("");
+        ageError.setText("");
+        emailError.setText("");
+
+        String firstName = firstNameField.getText();
+        String lastName = lastNameField.getText();
+        String ageString = ageField.getText();
+        String email = emailField.getText();
+
+        if (!Person.validateName(firstName)) {
+            firstNError.setText("First name must be at lest 2 characters.");
+            valid = false;
+        }
+
+        if (!Person.validateName(lastName)) {
+            lastNError.setText("Last name must be at lest 2 characters.");
+            valid = false;
+        }
+
+        int age = -0;
+
+        try {
+            age = Integer.parseInt(ageString);
+            if (!Person.validateAge(age)) {
+                ageError.setText("Age must be 0 or greater.");
+                valid = false;
+            }
+        } catch (NumberFormatException e) {
+            ageError.setText("Age must be a valid number!");
+            valid = false;
+        }
+
+        if (!Person.validateEmail(email)) {
+            emailError.setText("Invalid email");
+            valid = false;
+        }
+        return valid;
     }
 
     private void refreshTable(TableView<Person> table) {
