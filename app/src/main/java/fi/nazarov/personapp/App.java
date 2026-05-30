@@ -15,18 +15,23 @@ import fi.nazarov.personapp.ui.TerminalUI;
 import javafx.application.Application;
 
 public class App {
+    /**
+     * Main method assigning MyList, Repository and ui/gui to be used. Calling start methods of the ui-variants.
+     * @param args not used.
+     */
     public static void main(String[] args) {
         // MyList<Person> persons = new MyLinkedList<Person>();
         MyList<Person> persons = new MyArrayList<Person>();
+
         // Repository repository = new MemoryRepo(persons);
         Repository repository = new CSVRepo(persons, "datastorage/persons.csv");
-        // PersonController controllerUI = new PersonController(repository);
+
+        PersonController controller = new PersonController(repository);
 
         // TerminalUI ui = new TerminalUI(controllerUI);
         // ui.start();
 
-        PersonController controllerGUI = new PersonController(repository);
-        FXUI.setController(controllerGUI);
+        FXUI.setController(controller);
         Application.launch(FXUI.class, args);
     }
 }
