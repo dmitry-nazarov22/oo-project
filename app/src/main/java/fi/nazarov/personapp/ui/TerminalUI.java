@@ -1,10 +1,9 @@
 package fi.nazarov.personapp.ui;
 
-import fi.nazarov.personapp.Person;
+import fi.nazarov.personapp.datatype.Person;
 import fi.nazarov.personapp.controllers.PersonController;
 import fi.nazarov.personapp.lists.MyList;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class TerminalUI {

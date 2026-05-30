@@ -1,6 +1,6 @@
 package fi.nazarov.personapp.repository;
 
-import fi.nazarov.personapp.Person;
+import fi.nazarov.personapp.datatype.Person;
 import fi.nazarov.personapp.lists.MyList;
 
 public interface Repository {

@@ -1,4 +1,4 @@
-package fi.nazarov.personapp;
+package fi.nazarov.personapp.datatype;
 
 import java.util.Objects;
 import java.util.regex.Pattern;

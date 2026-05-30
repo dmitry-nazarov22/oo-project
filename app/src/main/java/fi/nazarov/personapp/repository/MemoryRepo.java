@@ -1,8 +1,7 @@
 package fi.nazarov.personapp.repository;
 
-import fi.nazarov.personapp.lists.MyArrayList;
 import fi.nazarov.personapp.lists.MyList;
-import fi.nazarov.personapp.Person;
+import fi.nazarov.personapp.datatype.Person;
 
 public class MemoryRepo implements Repository {
     MyList<Person> persons;

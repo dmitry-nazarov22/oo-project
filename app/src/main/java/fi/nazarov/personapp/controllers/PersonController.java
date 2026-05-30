@@ -1,6 +1,6 @@
 package fi.nazarov.personapp.controllers;
 
-import fi.nazarov.personapp.Person;
+import fi.nazarov.personapp.datatype.Person;
 import fi.nazarov.personapp.lists.MyList;
 import fi.nazarov.personapp.repository.Repository;
 

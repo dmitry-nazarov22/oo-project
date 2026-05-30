@@ -4,14 +4,12 @@
 package fi.nazarov.personapp;
 
 import fi.nazarov.personapp.controllers.PersonController;
+import fi.nazarov.personapp.datatype.Person;
 import fi.nazarov.personapp.lists.MyArrayList;
-import fi.nazarov.personapp.lists.MyLinkedList;
 import fi.nazarov.personapp.lists.MyList;
 import fi.nazarov.personapp.repository.CSVRepo;
-import fi.nazarov.personapp.repository.MemoryRepo;
 import fi.nazarov.personapp.repository.Repository;
 import fi.nazarov.personapp.ui.FXUI;
-import fi.nazarov.personapp.ui.TerminalUI;
 import javafx.application.Application;
 
 public class App {
