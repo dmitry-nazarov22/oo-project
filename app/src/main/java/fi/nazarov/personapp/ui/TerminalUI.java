@@ -11,11 +11,18 @@ public class TerminalUI {
     private boolean isRunning;
     private final PersonController controller;
 
+    /**
+     * Constructor assigning PersonController and setting isRunning to be true.
+     * @param controller PersonController to connect to repository.
+     */
     public TerminalUI(PersonController controller) {
         this.controller = controller;
         isRunning = true;
     }
 
+    /**
+     * Launches ui setting the initial loop of using the application in the TerminalUI.
+     */
     public void start() {
         Scanner s = new Scanner(System.in);
 
@@ -46,10 +53,13 @@ public class TerminalUI {
         }
     }
 
+    /**
+     * Prints the main menu.
+     */
     public void printMenu() {
         IO.println("""
                 x----------------------------x
-                |   – Contacts App Maxi –    |
+                |      – Contacts App –      |
                 |                            |
                 | Choose one of the options: |
                 |     1. View all contacts   |
@@ -61,6 +71,9 @@ public class TerminalUI {
                 """);
     }
 
+    /**
+     * Fetches persons from the repository and prints all persons.
+     */
     private void showContacts() {
         MyList<Person> persons = controller.fetchAllPersons();
 
@@ -76,6 +89,9 @@ public class TerminalUI {
         }
     }
 
+    /**
+     * Prompts for new contact data and creates a new Person with controller.
+     */
     private void createContact() {
         Scanner s = new Scanner(System.in);
 
@@ -89,6 +105,9 @@ public class TerminalUI {
         IO.println("Contact added!");
     }
 
+    /**
+     * Prompts for a contact to be deleted, validates to delete and deletes contact using controller.
+     */
     private void deleteContact() {
         Scanner s = new Scanner(System.in);
 
@@ -124,6 +143,9 @@ public class TerminalUI {
         }
     }
 
+    /**
+     * Prompts for Person and its data to be edited, prompts for new data and edits Person using controller.
+     */
     private void editContact() {
         IO.println("Which contact to edit?");
 
@@ -196,6 +218,12 @@ public class TerminalUI {
         }
     }
 
+    /**
+     * Prompts valid name as long unless a valid name is given.
+     * @param s Scanner.
+     * @param fieldName name type to be validated (lastName | firstName).
+     * @return validated name.
+     */
     private String promptValidName(Scanner s, String fieldName) {
         IO.println(fieldName + ": [at least 2 characters]");
         String value = s.nextLine();
@@ -207,6 +235,11 @@ public class TerminalUI {
         return value;
     }
 
+    /**
+     * Prompts for a valid age unless a valid value is given.
+     * @param s Scanner.
+     * @return the valid age.
+     */
     private int promptValidAge(Scanner s) {
         IO.println("Age: [age >= 0]");
         while (true) {
@@ -220,6 +253,11 @@ public class TerminalUI {
         }
     };
 
+    /**
+     * Prompts for valid email unless valid value is given.
+     * @param s Scanner.
+     * @return the valid value.
+     */
     private String promptValidEmail(Scanner s) {
         IO.println("Email:    (optional | [test-mail@test.com])");
         String value = s.nextLine();

@@ -16,10 +16,19 @@ public class FXUI extends Application {
 
     private static PersonController controller;
 
+    /**
+     * Setter fot the PersonController.
+     * @param controller controller to be assigned.
+     */
     public static void setController(PersonController controller) {
         FXUI.controller = controller;
     }
 
+    /**
+     * Launches the JavaFX gui and initializes the main application window.
+     * @param primaryStage the primary window.
+     * @throws Exception if an unexpected error occurs during UI initialization.
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         VBox root = new VBox();
@@ -41,6 +50,10 @@ public class FXUI extends Application {
         primaryStage.show();
     }
 
+    /**
+     * Creates the TableView containing all needed TableColumns to display Persons.
+     * @return the ready TableView.
+     */
     private TableView<Person> createPersonTable() {
         TableView<Person> contacts = new TableView<>();
 
@@ -80,6 +93,11 @@ public class FXUI extends Application {
         return contacts;
     }
 
+    /**
+     * Creates a HBox containing all necessary fields to add new contacts: button, TextFields, error Labels.
+     * @param table TableView where data will be added.
+     * @return HBox containing all necessary fields to add new contacts: button, TextFields, error Labels.
+     */
     private HBox createAddPersonComponent(TableView<Person> table) {
 
         TextField firstNameField = new TextField();
@@ -143,6 +161,13 @@ public class FXUI extends Application {
         );
     }
 
+    /**
+     * Creates the DeleteColumn with functionality.
+     * Creates a button on every cell in the column, with functionality to delete a contact from its own row.
+     *
+     * @param contacts TableView where the button will be deleting contacts.
+     * @return TableColumn for the delete button.
+     */
     private TableColumn<Person, Void> getDeleteColumn(TableView<Person> contacts) {
         TableColumn<Person, Void> deleteCol = new TableColumn<>();
         deleteCol.setCellFactory(cell -> new TableCell<>() {
@@ -168,6 +193,12 @@ public class FXUI extends Application {
         return deleteCol;
     }
 
+    /**
+     * Creates the EditColumn with functionality.
+     * Creates a button on every cell of the column, with functionality to edit a contact in its row.
+     * @param contacts TableView in which the contact data will be taken from.
+     * @return TableColumn containing edit buttons.
+     */
     private TableColumn<Person, Void> getEditColumn(TableView<Person> contacts) {
         TableColumn<Person, Void> editCol = new TableColumn<>();
         editCol.setCellFactory(cell -> new TableCell<>() {
@@ -193,6 +224,15 @@ public class FXUI extends Application {
         return editCol;
     }
 
+    /**
+     * Opens dialog window for editing contact.
+     * Creates a dialog window to edit the contact with TextFields, error Labels and save|cancel Buttons.
+     * Validates inputs after pressing "save" and shows errors or updates table in successful or error cases.
+     *
+     * @param p Person to be edited.
+     * @param index index of the person.
+     * @param contacts TableView to be updated after successful edit.
+     */
     private void openEditDialog(Person p, int index, TableView<Person> contacts) {
         Stage dialog = new Stage();
         dialog.setTitle("Edit contact");
@@ -261,6 +301,19 @@ public class FXUI extends Application {
         dialog.show();
     }
 
+    /**
+     * Validates all fields and shows error messages on errors.
+     *
+     * @param firstNameField TextField for first name.
+     * @param lastNameField TextField for last name.
+     * @param ageField TextField for age.
+     * @param emailField TextField for email.
+     * @param firstNError Error Label for firstname.
+     * @param lastNError Error Label for lastname.
+     * @param ageError Error Label for age.
+     * @param emailError Error Label for email.
+     * @return boolean of validity of all fields.
+     */
     private boolean validateInputs(
             TextField firstNameField,
             TextField lastNameField,
@@ -313,6 +366,11 @@ public class FXUI extends Application {
         return valid;
     }
 
+    /**
+     * Refreshes the table.
+     * Clearing the table and fetching all data again from the controller.
+     * @param table TableView with refreshed data.
+     */
     private void refreshTable(TableView<Person> table) {
         table.getItems().clear();
 
