@@ -14,6 +14,12 @@ public class CSVRepo implements Repository {
     private final MyList<Person> persons;
     private final String file;
 
+    /**
+     * Constructor assigning persons MyList and fileName for the CSV.
+     *
+     * @param persons MyList containing all Persons.
+     * @param fileName name of the CSV-file.
+     */
     public CSVRepo(MyList<Person> persons, String fileName) {
         this.persons = persons;
         this.file = fileName;
@@ -21,17 +27,31 @@ public class CSVRepo implements Repository {
         loadCSV();
     }
 
+    /**
+     * Find all person objects to display them.
+     *
+     * @return MyList of all Person objects
+     */
     @Override
     public MyList<Person> findAll() {
         return persons;
     }
 
+    /**
+     * Save new person to the list.
+     * @param person person object to be saved.
+     * @return true if successful and false if error.
+     */
     @Override
     public boolean save(Person person) {
         persons.add(person);
         return updateFile();
     }
 
+    /**
+     * Delete a person from the list.
+     * @return true if successful and false if error.
+     */
     @Override
     public boolean delete(int index) {
         try {
@@ -42,6 +62,11 @@ public class CSVRepo implements Repository {
         }
     }
 
+    /**
+     * Edit persons data in the list.
+     *
+     * @return true if successful and false if error.
+     */
     @Override
     public boolean edit(int index, Person updated) {
         try {
@@ -52,6 +77,9 @@ public class CSVRepo implements Repository {
         }
     }
 
+    /**
+     * Load data from CSV-file to a persons MyList.
+     */
     private void loadCSV() {
         try {
             Path path = Paths.get(file);
@@ -83,6 +111,11 @@ public class CSVRepo implements Repository {
         }
     }
 
+    /**
+     * Updates CSV-file by rewriting persons MyList again to it.
+     *
+     * @return true if successful, false if not.
+     */
     private boolean updateFile() {
         try {
             Path path = Paths.get(file);
