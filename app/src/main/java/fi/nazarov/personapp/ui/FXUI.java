@@ -12,6 +12,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.util.Optional;
+
 public class FXUI extends Application {
 
     private static PersonController controller;
@@ -174,9 +176,11 @@ public class FXUI extends Application {
             final Button deleteButton = new Button("Delete");
             {
                 deleteButton.setOnAction(event -> {
-                    int index = getIndex();
-                    controller.deletePerson(index);
-                    refreshTable(contacts);
+                    if (confirmationDialog()) {
+                        int index = getIndex();
+                        controller.deletePerson(index);
+                        refreshTable(contacts);
+                    }
                 });
             }
 
@@ -364,6 +368,14 @@ public class FXUI extends Application {
             valid = false;
         }
         return valid;
+    }
+
+    private boolean confirmationDialog() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("Are you sure?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        return result.get() == ButtonType.OK;
     }
 
     /**
