@@ -119,7 +119,6 @@ public class CSVRepo implements Repository {
     private boolean updateFile() {
         try {
             Path path = Paths.get(file);
-            System.out.println(path.toAbsolutePath());
 
             StringBuilder toWrite = new StringBuilder();
 
