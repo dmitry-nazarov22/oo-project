@@ -57,8 +57,37 @@ Custom Data Structures (MyArrayList or MyLinkedList, which are interchangeable)
 
 ## Screenshots
 
+### GUI (JavaFX)
 ![image](./screenshots/overview.png)
 (Main overview)
+
+![image](./screenshots/errors-overview.png)
+(Main overview errors)
+
+![image](./screenshots/edit-view.png)
+(Edit view)
+
+![image](./screenshots/errors-edit-view.png)
+(Edit view error example)
+
+![gif](./screenshots/delete-confirmation.gif)
+(Delete confirmation)
+
+### CLI-UI
+![image](./screenshots/cli-menu.png)
+(Main menu)
+
+![image](./screenshots/cli-read-contacts.png)
+(Read contacts)
+
+![gif](./screenshots/cli-add.gif)
+(Add contact)
+
+![gif](./screenshots/cli-edit.gif)
+(Add contact)
+
+![image](./screenshots/cli-delete-confirmation.png)
+(Delete confirmation)
 
 ## Tech
 
