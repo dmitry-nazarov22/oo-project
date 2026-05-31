@@ -10,6 +10,7 @@ import fi.nazarov.personapp.lists.MyList;
 import fi.nazarov.personapp.repository.CSVRepo;
 import fi.nazarov.personapp.repository.Repository;
 import fi.nazarov.personapp.ui.FXUI;
+import fi.nazarov.personapp.ui.TerminalUI;
 import javafx.application.Application;
 
 public class App {
@@ -26,7 +27,7 @@ public class App {
 
         PersonController controller = new PersonController(repository);
 
-        // TerminalUI ui = new TerminalUI(controllerUI);
+        // TerminalUI ui = new TerminalUI(controller);
         // ui.start();
 
         FXUI.setController(controller);
