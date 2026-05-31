@@ -104,7 +104,7 @@ Custom Data Structures (MyArrayList or MyLinkedList, which are interchangeable)
 1. Running GUI version:
 - after installing the projects zip-file:
 ```bash
-   cd contactsapp/install/app/bin
+   cd contactsapp/src/app/bin
    ./app
 ```
 
@@ -143,7 +143,7 @@ By default, the app uses `CSVRepo`. To use `MemoryRepo` for testing, modify the 
 
 ## AI usage and learning resources
 
-AI was used heavily in JavaFX configuration to work with my Gradle version and Java 25.
+AI was used heavily in JavaFX, Checkstyle, JUnit configuration to work with my Gradle version and Java 25.
 Also learning recources were scarce on the topic of JavaFX so learning of the principles and
 syntax were done with AI help.
 
