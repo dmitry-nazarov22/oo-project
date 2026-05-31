@@ -99,8 +99,15 @@ Custom Data Structures (MyArrayList or MyLinkedList, which are interchangeable)
 
 ### Run of the release-version
 
-If a release zip-file was downloaded then after moving to the personapp folder it can be run with:
+1. Running GUI version:
+- after installing the projects zip-file:
+  ```bash
+     cd build/install/app/bin
+     ./app
+  ```
 
+2. Running CLI version
+- After installing the projects zip-file:
 ```bash
 java -jar app.jar
 ```
@@ -120,9 +127,6 @@ java -jar app.jar
 
 ```bash
 ./gradlew run
-
-# Or execute the built JAR directly
-java -jar app/build/libs/app.jar
 ```
 
 ### Using MemoryRepo (development)
