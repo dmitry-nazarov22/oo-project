@@ -94,6 +94,8 @@ Custom Data Structures (MyArrayList or MyLinkedList, which are interchangeable)
 - **Language**: Java 25
 - **Build Tool**: Gradle
 - **UI**: OPTIONAL Command-Line Interface or JavaFX GUI
+- **JUnit** tests
+- **Sun Checkstyle**
 
 ## How to compile and run
 
@@ -101,21 +103,17 @@ Custom Data Structures (MyArrayList or MyLinkedList, which are interchangeable)
 
 1. Running GUI version:
 - after installing the projects zip-file:
-  ```bash
-     cd build/install/app/bin
-     ./app
-  ```
+```bash
+   cd contactsapp/install/app/bin
+   ./app
+```
 
 2. Running CLI version
 - After installing the projects zip-file:
 ```bash
-java -jar app.jar
+cd contactsapp
+java -jar cli.jar
 ```
-
-### Tech
-
-- Java 25
-- Gradle (or use the included `gradlew` wrapper)
 
 ### Build
 
