@@ -14,22 +14,23 @@ public class TerminalUI {
      * Constructor assigning PersonController and setting isRunning to be true.
      * @param controller PersonController to connect to repository.
      */
-    public TerminalUI(PersonController controller) {
+    public TerminalUI(final PersonController controller) {
         this.controller = controller;
         isRunning = true;
     }
 
     /**
-     * Launches ui setting the initial loop of using the application in the TerminalUI.
+     * Launches ui setting the initial loop of
+     * using the application in the TerminalUI.
      */
     public void start() {
         Scanner s = new Scanner(System.in);
 
-        while(isRunning) {
+        while (isRunning) {
             printMenu();
             String choice = s.nextLine();
 
-            switch(choice) {
+            switch (choice) {
                 case "0":
                     IO.println("Closing the application...");
                     isRunning = false;
@@ -47,7 +48,10 @@ public class TerminalUI {
                     editContact();
                     break;
                 default:
-                    IO.println("There's no such option. Please, choose one form the menu");
+                    IO.println(
+                        "There's no such option."
+                        + " Please, choose one form the menu"
+                    );
             }
         }
     }
@@ -105,7 +109,8 @@ public class TerminalUI {
     }
 
     /**
-     * Prompts for a contact to be deleted, validates to delete and deletes contact using controller.
+     * Prompts for a contact to be deleted, validates
+     * to delete and deletes contact using controller.
      */
     private void deleteContact() {
         Scanner s = new Scanner(System.in);
@@ -116,7 +121,11 @@ public class TerminalUI {
         for (int i = 0; i < persons.size(); i++) {
             Person p = persons.get(i);
             int displayIndex = i + 1;
-            IO.println(displayIndex + ".   " + p.getLastName() + ", " + p.getFirstName());
+            IO.println(displayIndex
+                    + ".   "
+                    + p.getLastName()
+                    + ", " + p.getFirstName()
+            );
         }
         boolean invalidIndex = true;
         int index = 0;
@@ -130,7 +139,10 @@ public class TerminalUI {
             }
         }
 
-        IO.println("Are you sure to delete contact number " + (index + 1) + "?");
+        IO.println("Are you sure to delete contact number "
+                + (index + 1)
+                + "?"
+        );
         IO.println("Input 'y' if you are sure.");
         String verification = s.nextLine();
 
@@ -143,7 +155,8 @@ public class TerminalUI {
     }
 
     /**
-     * Prompts for Person and its data to be edited, prompts for new data and edits Person using controller.
+     * Prompts for Person and its data to be edited,
+     * prompts for new data and edits Person using controller.
      */
     private void editContact() {
         IO.println("Which contact to edit?");
@@ -152,7 +165,11 @@ public class TerminalUI {
         for (int i = 0; i < persons.size(); i++) {
             Person p = persons.get(i);
             int displayIndex = i + 1;
-            IO.println(displayIndex + ".   " + p.getLastName() + ", " + p.getFirstName());
+            IO.println(displayIndex
+                    + ".   "
+                    + p.getLastName()
+                    + ", "
+                    + p.getFirstName());
         }
 
         Scanner s = new Scanner(System.in);
@@ -181,7 +198,7 @@ public class TerminalUI {
                 """);
         String choice = s.nextLine();
 
-        switch(choice) {
+        switch (choice) {
             case "1":
                 toEdit.setFirstName(promptValidName(s, "New first name"));
                 IO.println("Contact edited successfully!");
@@ -223,13 +240,13 @@ public class TerminalUI {
      * @param fieldName name type to be validated (lastName | firstName).
      * @return validated name.
      */
-    private String promptValidName(Scanner s, String fieldName) {
+    private String promptValidName(final Scanner s, final String fieldName) {
         IO.println(fieldName + ": [at least 2 characters]");
         String value = s.nextLine();
         while (!Person.validateName(value)) {
             IO.println("Invalid " + fieldName + ". Please, input it again:");
             value = s.nextLine();
-        };
+        }
 
         return value;
     }
@@ -239,15 +256,21 @@ public class TerminalUI {
      * @param s Scanner.
      * @return the valid age.
      */
-    private int promptValidAge(Scanner s) {
+    private int promptValidAge(final Scanner s) {
         IO.println("Age: [age >= 0]");
         while (true) {
             try {
                 int value = Integer.parseInt(s.nextLine());
-                if (Person.validateAge(value)) return value;
-                IO.println("Invalid age. Please, input it again:    [age >= 0]");
+                if (Person.validateAge(value)) {
+                    return value;
+                }
+                IO.println(
+                    "Invalid age. Please, input it again:    [age >= 0]"
+                );
             } catch (NumberFormatException e) {
-                IO.println("Age must be a valid integer. Please, input it again:");
+                IO.println(
+                    "Age must be a valid integer. Please, input it again:"
+                );
             }
         }
     };
@@ -257,13 +280,16 @@ public class TerminalUI {
      * @param s Scanner.
      * @return the valid value.
      */
-    private String promptValidEmail(Scanner s) {
+    private String promptValidEmail(final Scanner s) {
         IO.println("Email:    (optional | [test-mail@test.com])");
         String value = s.nextLine();
         while (!Person.validateEmail(value)) {
-            IO.println("Invalid email. Please, input it again:    (optional | [test-mail@test.com])");
+            IO.println(
+                "Invalid email. Please, input it again:"
+                + "    (optional | [test-mail@test.com])"
+            );
             value = s.nextLine();
-        };
+        }
 
         return value;
     }

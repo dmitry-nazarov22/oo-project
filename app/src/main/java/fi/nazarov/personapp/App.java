@@ -10,15 +10,21 @@ import fi.nazarov.personapp.lists.MyList;
 import fi.nazarov.personapp.repository.CSVRepo;
 import fi.nazarov.personapp.repository.Repository;
 import fi.nazarov.personapp.ui.FXUI;
-import fi.nazarov.personapp.ui.TerminalUI;
+// import fi.nazarov.personapp.ui.TerminalUI;
 import javafx.application.Application;
 
-public class App {
+public final class App {
+
+    private App() {
+        // not used
+    }
+
     /**
-     * Main method assigning MyList, Repository and ui/gui to be used. Calling start methods of the ui-variants.
+     * Main method assigning MyList, Repository and ui/gui
+     * to be used. Calling start methods of the ui-variants.
      * @param args not used.
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         // MyList<Person> persons = new MyLinkedList<Person>();
         MyList<Person> persons = new MyArrayList<Person>();
 

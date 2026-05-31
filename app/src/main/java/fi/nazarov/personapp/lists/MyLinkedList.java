@@ -158,7 +158,7 @@ public class MyLinkedList<T> implements MyList<T> {
      * @throws IndexOutOfBoundsException if the index is out of range.
      */
     @Override
-    public void set(int index, T updated) {
+    public void set(final int index, final T updated) {
         if (index < 0 || index >= size()) {
             throw new IndexOutOfBoundsException();
         }

@@ -20,6 +20,8 @@ public interface Repository {
 
     /**
      * Delete a person from the list.
+     *
+     * @param index index of the person in the list.
      * @return true if successful and false if error.
      */
     boolean delete(int index);
@@ -27,6 +29,8 @@ public interface Repository {
     /**
      * Edit persons data in the list.
      *
+     * @param index index of the person in the list.
+     * @param updated updated Person object.
      * @return true if successful and false if error.
      */
     boolean edit(int index, Person updated);

@@ -11,7 +11,7 @@ public class PersonController {
      * Constructor assigning repository.
      * @param repository repository to be used with the PersonController.
      */
-    public PersonController(Repository repository) {
+    public PersonController(final Repository repository) {
         this.repository = repository;
     }
 
@@ -27,7 +27,7 @@ public class PersonController {
      * Calls repository's save-method with Person object.
      * @param p Person to be saved.
      */
-    public void createPerson(Person p) {
+    public void createPerson(final Person p) {
         repository.save(p);
     }
 
@@ -35,16 +35,17 @@ public class PersonController {
      * Calls delete-method to delete person from repository by index.
      * @param index index of a person in the list to be deleted.
      */
-    public void deletePerson(int index) {
+    public void deletePerson(final int index) {
         repository.delete(index);
     }
 
     /**
-     * Calls edit-method with index of the Person and the updated Person to update data in the repository.
+     * Calls edit-method with index of the Person and the updated
+     * Person to update data in the repository.
      * @param index index of a person in the list to be edited.
      * @param updated new Person with the updated data.
      */
-    public void editPerson(int index, Person updated) {
+    public void editPerson(final int index, final Person updated) {
         repository.edit(index, updated);
     }
 }

@@ -6,7 +6,14 @@ import fi.nazarov.personapp.lists.MyList;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -22,7 +29,7 @@ public class FXUI extends Application {
      * Setter fot the PersonController.
      * @param controller controller to be assigned.
      */
-    public static void setController(PersonController controller) {
+    public static void setController(final PersonController controller) {
         FXUI.controller = controller;
     }
 
@@ -32,10 +39,15 @@ public class FXUI extends Application {
      * @throws Exception if an unexpected error occurs during UI initialization.
      */
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(final Stage primaryStage) throws Exception {
+        final int stdSceneWidth = 900;
+        final int stdSceneHeight = 400;
+        final int stdSpacing = 10;
+        final int stdPadding = 30;
+
         VBox root = new VBox();
-        root.setPadding(new Insets(30));
-        root.setSpacing(10);
+        root.setPadding(new Insets(stdPadding));
+        root.setSpacing(stdSpacing);
 
         TableView<Person> table = createPersonTable();
         root.getChildren().add(table);
@@ -45,7 +57,7 @@ public class FXUI extends Application {
 
         root.getChildren().add(addPersonComponent);
 
-        Scene scene = new Scene(root, 900, 400);
+        Scene scene = new Scene(root, stdSceneWidth, stdSceneHeight);
 
         primaryStage.setTitle("Contacts");
         primaryStage.setScene(scene);
@@ -53,18 +65,21 @@ public class FXUI extends Application {
     }
 
     /**
-     * Creates the TableView containing all needed TableColumns to display Persons.
+     * Creates the TableView containing all needed
+     * TableColumns to display Persons.
      * @return the ready TableView.
      */
     private TableView<Person> createPersonTable() {
         TableView<Person> contacts = new TableView<>();
 
-        TableColumn<Person, String> firstNameCol = new TableColumn<>("First name");
+        TableColumn<Person, String> firstNameCol =
+                new TableColumn<>("First name");
         firstNameCol.setCellValueFactory(
                 new PropertyValueFactory<Person, String>("firstName")
         );
 
-        TableColumn<Person, String> lastNameCol = new TableColumn<>("Last name");
+        TableColumn<Person, String> lastNameCol =
+                new TableColumn<>("Last name");
         lastNameCol.setCellValueFactory(
                 new PropertyValueFactory<Person, String>("lastName")
         );
@@ -96,11 +111,15 @@ public class FXUI extends Application {
     }
 
     /**
-     * Creates a HBox containing all necessary fields to add new contacts: button, TextFields, error Labels.
+     * Creates a HBox containing all necessary fields to
+     * add new contacts: button, TextFields, error Labels.
+     *
      * @param table TableView where data will be added.
-     * @return HBox containing all necessary fields to add new contacts: button, TextFields, error Labels.
+     * @return HBox containing all necessary fields to
+     * add new contacts: button, TextFields, error Labels.
      */
-    private HBox createAddPersonComponent(TableView<Person> table) {
+    private HBox createAddPersonComponent(final TableView<Person> table) {
+        final int stdSpacing = 5;
 
         TextField firstNameField = new TextField();
         firstNameField.setPromptText("First name");
@@ -136,7 +155,9 @@ public class FXUI extends Application {
                     lastNError,
                     ageError,
                     emailError
-            )) return;
+            )) {
+                return;
+            }
 
             String firstName = firstNameField.getText();
             String lastName = lastNameField.getText();
@@ -154,26 +175,29 @@ public class FXUI extends Application {
             emailField.clear();
         });
 
-        return new HBox(5,
-                new VBox(5, firstNameField, firstNError),
-                new VBox(5, lastNameField, lastNError),
-                new VBox(5, ageField, ageError),
-                new VBox(5, emailField, emailError),
+        return new HBox(stdSpacing,
+                new VBox(stdSpacing, firstNameField, firstNError),
+                new VBox(stdSpacing, lastNameField, lastNError),
+                new VBox(stdSpacing, ageField, ageError),
+                new VBox(stdSpacing, emailField, emailError),
                 addButton
         );
     }
 
     /**
      * Creates the DeleteColumn with functionality.
-     * Creates a button on every cell in the column, with functionality to delete a contact from its own row.
+     * Creates a button on every cell in the column,
+     * with functionality to delete a contact from its own row.
      *
      * @param contacts TableView where the button will be deleting contacts.
      * @return TableColumn for the delete button.
      */
-    private TableColumn<Person, Void> getDeleteColumn(TableView<Person> contacts) {
+    private TableColumn<Person, Void> getDeleteColumn(
+            final TableView<Person> contacts
+    ) {
         TableColumn<Person, Void> deleteCol = new TableColumn<>();
         deleteCol.setCellFactory(cell -> new TableCell<>() {
-            final Button deleteButton = new Button("Delete");
+            private final Button deleteButton = new Button("Delete");
             {
                 deleteButton.setOnAction(event -> {
                     if (confirmationDialog()) {
@@ -185,7 +209,7 @@ public class FXUI extends Application {
             }
 
             @Override
-            protected void updateItem(Void item, boolean empty) {
+            protected void updateItem(final Void item, final boolean empty) {
                 super.updateItem(item, empty);
                 if (empty) {
                     setGraphic(null);
@@ -199,14 +223,17 @@ public class FXUI extends Application {
 
     /**
      * Creates the EditColumn with functionality.
-     * Creates a button on every cell of the column, with functionality to edit a contact in its row.
+     * Creates a button on every cell of the column,
+     * with functionality to edit a contact in its row.
      * @param contacts TableView in which the contact data will be taken from.
      * @return TableColumn containing edit buttons.
      */
-    private TableColumn<Person, Void> getEditColumn(TableView<Person> contacts) {
+    private TableColumn<Person, Void> getEditColumn(
+            final TableView<Person> contacts
+    ) {
         TableColumn<Person, Void> editCol = new TableColumn<>();
         editCol.setCellFactory(cell -> new TableCell<>() {
-            final Button editButton = new Button("Edit");
+            private final Button editButton = new Button("Edit");
             {
                 editButton.setOnAction(event -> {
                     int index = getIndex();
@@ -216,7 +243,7 @@ public class FXUI extends Application {
             }
 
             @Override
-            protected void updateItem(Void item, boolean empty) {
+            protected void updateItem(final Void item, final boolean empty) {
                 super.updateItem(item, empty);
                 if (empty) {
                     setGraphic(null);
@@ -230,14 +257,26 @@ public class FXUI extends Application {
 
     /**
      * Opens dialog window for editing contact.
-     * Creates a dialog window to edit the contact with TextFields, error Labels and save|cancel Buttons.
-     * Validates inputs after pressing "save" and shows errors or updates table in successful or error cases.
+     * Creates a dialog window to edit the contact with
+     * TextFields, error Labels and save|cancel Buttons.
+     *
+     * Validates inputs after pressing "save" and shows errors
+     * or updates table in successful or error cases.
      *
      * @param p Person to be edited.
      * @param index index of the person.
      * @param contacts TableView to be updated after successful edit.
      */
-    private void openEditDialog(Person p, int index, TableView<Person> contacts) {
+    private void openEditDialog(
+            final Person p,
+            final int index,
+            final TableView<Person> contacts
+    ) {
+        final int stdDialogWidth = 300;
+        final int stdDialogHeight = 300;
+        final int stdPadding = 10;
+        final int stdSpacing = 5;
+
         Stage dialog = new Stage();
         dialog.setTitle("Edit contact");
 
@@ -274,7 +313,9 @@ public class FXUI extends Application {
                 lastNError,
                 ageError,
                 emailError
-            )) return;
+            )) {
+                return;
+            }
 
             p.setFirstName(firstNameField.getText());
             p.setLastName(lastNameField.getText());
@@ -291,7 +332,7 @@ public class FXUI extends Application {
             dialog.close();
         });
 
-        VBox layout = new VBox(5,
+        VBox layout = new VBox(stdSpacing,
             firstNameField, firstNError,
             lastNameField, lastNError,
             ageField, ageError,
@@ -299,9 +340,9 @@ public class FXUI extends Application {
             saveButton,
             closeButton
         );
-        layout.setPadding(new Insets(10));
+        layout.setPadding(new Insets(stdPadding));
 
-        dialog.setScene(new Scene(layout, 300, 300));
+        dialog.setScene(new Scene(layout, stdDialogWidth, stdDialogHeight));
         dialog.show();
     }
 
@@ -319,14 +360,14 @@ public class FXUI extends Application {
      * @return boolean of validity of all fields.
      */
     private boolean validateInputs(
-            TextField firstNameField,
-            TextField lastNameField,
-            TextField ageField,
-            TextField emailField,
-            Label firstNError,
-            Label lastNError,
-            Label ageError,
-            Label emailError
+            final TextField firstNameField,
+            final TextField lastNameField,
+            final TextField ageField,
+            final TextField emailField,
+            final Label firstNError,
+            final Label lastNError,
+            final Label ageError,
+            final Label emailError
     ) {
         boolean valid = true;
 
@@ -350,7 +391,7 @@ public class FXUI extends Application {
             valid = false;
         }
 
-        int age = -0;
+        int age = 0;
 
         try {
             age = Integer.parseInt(ageString);
@@ -387,7 +428,7 @@ public class FXUI extends Application {
      * Clearing the table and fetching all data again from the controller.
      * @param table TableView with refreshed data.
      */
-    private void refreshTable(TableView<Person> table) {
+    private void refreshTable(final TableView<Person> table) {
         table.getItems().clear();
 
         MyList<Person> persons = controller.fetchAllPersons();

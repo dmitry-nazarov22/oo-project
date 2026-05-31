@@ -20,7 +20,7 @@ public class CSVRepo implements Repository {
      * @param persons MyList containing all Persons.
      * @param fileName name of the CSV-file.
      */
-    public CSVRepo(MyList<Person> persons, String fileName) {
+    public CSVRepo(final MyList<Person> persons, final String fileName) {
         this.persons = persons;
         this.file = fileName;
 
@@ -43,7 +43,7 @@ public class CSVRepo implements Repository {
      * @return true if successful and false if error.
      */
     @Override
-    public boolean save(Person person) {
+    public boolean save(final Person person) {
         persons.add(person);
         return updateFile();
     }
@@ -53,7 +53,7 @@ public class CSVRepo implements Repository {
      * @return true if successful and false if error.
      */
     @Override
-    public boolean delete(int index) {
+    public boolean delete(final int index) {
         try {
             persons.remove(index);
             return updateFile();
@@ -68,7 +68,7 @@ public class CSVRepo implements Repository {
      * @return true if successful and false if error.
      */
     @Override
-    public boolean edit(int index, Person updated) {
+    public boolean edit(final int index, final Person updated) {
         try {
             persons.set(index, updated);
             return updateFile();
@@ -81,6 +81,12 @@ public class CSVRepo implements Repository {
      * Load data from CSV-file to a persons MyList.
      */
     private void loadCSV() {
+        final int firstNameIndex = 0;
+        final int lastNameIndex = 1;
+        final int ageIndex = 2;
+        final int emailIndex = 3;
+        final int sizeWhenEmailInserted = 4;
+
         try {
             Path path = Paths.get(file);
 
@@ -93,18 +99,18 @@ public class CSVRepo implements Repository {
             for (String line : lines) {
                 String[] parts = line.split(",");
 
-                String firstName = parts[0];
-                String lastName = parts[1];
-                int age = Integer.parseInt(parts[2]);
+                String firstName = parts[firstNameIndex];
+                String lastName = parts[lastNameIndex];
+                int age = Integer.parseInt(parts[ageIndex]);
                 String email = "";
-                if (parts.length == 4) {
-                    email = parts[3];
+                if (parts.length == sizeWhenEmailInserted) {
+                    email = parts[emailIndex];
                 }
 
                 Person person = new Person(firstName, lastName, age, email);
                 persons.add(person);
             }
-        } catch(IOException e) {
+        } catch (IOException e) {
             IO.println("Error while reading file.");
         } catch (InvalidPathException e) {
             IO.println("Invalid path given: " + e);
@@ -137,7 +143,7 @@ public class CSVRepo implements Repository {
 
             Files.writeString(path, toWrite);
             return true;
-        } catch(IOException e) {
+        } catch (IOException e) {
             IO.println("Error while writing to file.");
             return false;
         } catch (InvalidPathException e) {

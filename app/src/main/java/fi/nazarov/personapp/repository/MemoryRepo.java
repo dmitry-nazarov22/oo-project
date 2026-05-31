@@ -4,14 +4,14 @@ import fi.nazarov.personapp.lists.MyList;
 import fi.nazarov.personapp.datatype.Person;
 
 public class MemoryRepo implements Repository {
-    MyList<Person> persons;
+    private MyList<Person> persons;
 
     /**
      * Constructor assigning persons MyList.
      *
      * @param persons MyList containing Person objects.
      */
-    public MemoryRepo(MyList<Person> persons) {
+    public MemoryRepo(final MyList<Person> persons) {
         this.persons = persons;
     }
 
@@ -31,7 +31,7 @@ public class MemoryRepo implements Repository {
      * @return true if successful and false if error.
      */
     @Override
-    public boolean save(Person person) {
+    public boolean save(final Person person) {
         persons.add(person);
         return true;
     }
@@ -41,7 +41,7 @@ public class MemoryRepo implements Repository {
      * @return true if successful and false if error.
      */
     @Override
-    public boolean delete(int index) {
+    public boolean delete(final int index) {
         try {
             persons.remove(index);
             return true;
@@ -56,7 +56,7 @@ public class MemoryRepo implements Repository {
      * @return true if successful and false if error.
      */
     @Override
-    public boolean edit(int index, Person updated) {
+    public boolean edit(final int index, final Person updated) {
         try {
             persons.set(index, updated);
             return true;

@@ -4,10 +4,10 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class Person {
-    String firstName;
-    String lastName;
-    int age;
-    String email;
+    private String firstName;
+    private String lastName;
+    private int age;
+    private String email;
 
     /**
      * Constructor assigning firstName, lastName, age and email.
@@ -17,7 +17,12 @@ public class Person {
      * @param age age of the person.
      * @param email email of the person.
      */
-    public Person(String firstName, String lastName, int age, String email) {
+    public Person(
+            final String firstName,
+            final String lastName,
+            final int age,
+            final String email
+    ) {
         setFirstName(firstName);
         setLastName(lastName);
         setAge(age);
@@ -38,7 +43,7 @@ public class Person {
      *
      * @param firstName first name.
      */
-    public void setFirstName(String firstName) {
+    public void setFirstName(final String firstName) {
         this.firstName = firstName;
     }
 
@@ -55,7 +60,7 @@ public class Person {
      * Setter for last name.
      * @param lastName last name.
      */
-    public void setLastName(String lastName) {
+    public void setLastName(final String lastName) {
         this.lastName = lastName;
     }
 
@@ -71,7 +76,7 @@ public class Person {
      * Setter for age.
      * @param age age.
      */
-    public void setAge(int age) {
+    public void setAge(final int age) {
         this.age = age;
     }
 
@@ -87,7 +92,7 @@ public class Person {
      * Setter for email.
      * @param email email.
      */
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
         this.email = email;
     }
 
@@ -96,7 +101,7 @@ public class Person {
      * @param name name to be validated.
      * @return boolean for passing validation or not.
      */
-    public static boolean validateName(String name) {
+    public static boolean validateName(final String name) {
         return name.length() >= 2;
     }
 
@@ -105,7 +110,7 @@ public class Person {
      * @param age age to be validated.
      * @return boolean for passing validation or not.
      */
-    public static boolean validateAge(int age) {
+    public static boolean validateAge(final int age) {
         return age >= 0;
     }
 
@@ -114,8 +119,9 @@ public class Person {
      * @param email email to be validated.
      * @return boolean to match the regex pattern or not.
      */
-    public static boolean validateEmail(String email) {
-        String regexPattern = "^$|^[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}$";
+    public static boolean validateEmail(final String email) {
+        String regexPattern =
+                "^$|^[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}$";
         return Pattern.compile(regexPattern)
             .matcher(email)
             .matches();
@@ -127,12 +133,12 @@ public class Person {
      */
     @Override
     public String toString() {
-        return "Person{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", age=" + age +
-                ", email='" + email + '\'' +
-                '}';
+        return "Person{"
+                + "firstName='" + firstName + '\''
+                + ", lastName='" + lastName + '\''
+                + ", age=" + age
+                + ", email='" + email + '\''
+                + '}';
     }
 
     /**
@@ -141,9 +147,21 @@ public class Person {
      * @return boolean representing equality of object to Person.
      */
     @Override
-    public boolean equals(Object o) {
-        if (!(o instanceof Person person)) return false;
-        return age == person.age && Objects.equals(firstName, person.firstName) && Objects.equals(lastName, person.lastName) && Objects.equals(email, person.email);
+    public boolean equals(final Object o) {
+        if (!(o instanceof Person person)) {
+            return false;
+        }
+        return age == person.age && Objects.equals(
+                firstName,
+                person.firstName
+            )
+            && Objects.equals(lastName,
+                person.lastName
+            )
+            && Objects.equals(
+                    email,
+                    person.email
+            );
     }
 
     /**
