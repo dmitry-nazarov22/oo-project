@@ -8,7 +8,7 @@ This project showcases my skills in **object-oriented programming**. Including l
 
 Project is completed as part of the second-year Object-Oriented Programming course at Tampere University of Applied Sciences.
 
-- [Screencast link]()
+- [Screencast link](https://youtu.be/XtZ89OOym9w)
 
 ## Build status
 
