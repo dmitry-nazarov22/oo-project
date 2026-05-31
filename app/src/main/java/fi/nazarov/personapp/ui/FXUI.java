@@ -370,6 +370,10 @@ public class FXUI extends Application {
         return valid;
     }
 
+    /**
+     * Opens confirmation dialog and returns answer in boolean.
+     * @return boolean of representing users chosen answer to the confirmation.
+     */
     private boolean confirmationDialog() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setContentText("Are you sure?");
