@@ -8,8 +8,6 @@ This project showcases my skills in **object-oriented programming**. Including l
 
 Project is completed as part of the second-year Object-Oriented Programming course at Tampere University of Applied Sciences.
 
-- [Screencast link](https://youtu.be/XtZ89OOym9w)
-
 ## Build status
 
 Every push of commits to GitHub is done considering that the app is working, but
